@@ -10,7 +10,7 @@ public class BotService {
     private GameObject bot;
     private PlayerAction playerAction;
     private GameState gameState;
-    private GameObject worldCenter;
+    // private GameObject worldCenter;
 
     public BotService() {
         this.playerAction = new PlayerAction();
@@ -35,8 +35,8 @@ public class BotService {
     }
 
     public void computeNextPlayerAction(PlayerAction playerAction) {
-        playerAction.action = PlayerActions.FORWARD;
-        playerAction.heading = 270;
+        playerAction.action = PlayerActions.FORWARD; 
+        playerAction.heading = new Random().nextInt(360);
 
         if (!gameState.getGameObjects().isEmpty()) {
             var foodList = gameState.getGameObjects()    
@@ -99,19 +99,30 @@ public class BotService {
                     .comparing(item -> getDistanceBetween(bot, item)))
                     .collect(Collectors.toList());
 
-            // if(bot.getSize()<600){
-            //     playerAction.heading = getHeadingBetween(foodList.get(0));
-            // } else {//(bot.getSize()>=600){
-            //     if(enemyList.get(0).size>bot.getSize()){
-            //         playerAction.heading = 180-getHeadingBetween(enemyList.get(0));
-            //     } else {
-            //         playerAction.heading = getHeadingBetween(enemyList.get(0));
-            //     }
-            // }
-            playerAction.heading = getHeadingBetween(foodList.get(0));
+            if(bot.getSize()<600){
+                playerAction.heading = getHeadingBetween(foodList.get(0));
+            } else {//(bot.getSize()>=600){
+                if(enemyList.get(0).size > bot.getSize()){
+                    playerAction.heading = 180-getHeadingBetween(enemyList.get(0));
+                } else {
+                    playerAction.heading = getHeadingBetween(enemyList.get(0));
+                }
+            }
+            
+            // var nearestObstacle = gameState.getGameObjects()
+            // .stream().filter(item -> item.getGameObjectType() == ObjectTypes.ASTEROID_FIELD || item.getGameObjectType() == ObjectTypes.GAS_CLOUD)
+            // .sorted(Comparator
+            // .comparing(item -> getDistanceBetween(bot, item)))
+            // .collect(Collectors.toList()).get(0);
+
+            if(getDistanceBetween(obstacleList.get(0), bot) < 100){
+                playerAction.heading = 180-getHeadingBetween(obstacleList.get(0));
+                playerAction.action = PlayerActions.FIRETELEPORTER;
+            }
+
+
             
         }
-
         this.playerAction = playerAction;
     }
 
