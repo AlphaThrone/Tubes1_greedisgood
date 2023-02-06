@@ -10,6 +10,7 @@ public class BotService {
     private GameObject bot;
     private PlayerAction playerAction;
     private GameState gameState;
+    private GameObject worldCenter;
 
     public BotService() {
         this.playerAction = new PlayerAction();
@@ -35,7 +36,7 @@ public class BotService {
 
     public void computeNextPlayerAction(PlayerAction playerAction) {
         playerAction.action = PlayerActions.FORWARD;
-        playerAction.heading = new Random().nextInt(360);
+        playerAction.heading = 270;
 
         if (!gameState.getGameObjects().isEmpty()) {
             var foodList = gameState.getGameObjects()    
@@ -43,7 +44,71 @@ public class BotService {
                     .sorted(Comparator
                     .comparing(item -> getDistanceBetween(bot, item)))
                     .collect(Collectors.toList());
-                playerAction.heading = getHeadingBetween(foodList.get(0));
+                    
+                foodList.addAll(gameState.getGameObjects()    
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.SUPERFOOD)
+                    .sorted(Comparator
+                    .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList()));
+                
+                foodList.addAll(gameState.getGameObjects()    
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.SUPERNOVA_PICKUP)
+                    .sorted(Comparator
+                    .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList()));
+
+            var enemyList = gameState.getGameObjects()    
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.PLAYER)
+                    .sorted(Comparator
+                    .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
+            
+            var projectileList = gameState.getGameObjects()    
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.TORPEDO_SALVO)
+                    .sorted(Comparator
+                    .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
+
+                projectileList.addAll(gameState.getGameObjects()    
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.TELEPORTER)
+                    .sorted(Comparator
+                    .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList()));
+                
+                projectileList.addAll(gameState.getGameObjects()    
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.SUPERNOVA_BOMB)
+                    .sorted(Comparator
+                    .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList()));
+
+            var obstacleList = gameState.getGameObjects()    
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.GAS_CLOUD)
+                    .sorted(Comparator
+                    .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
+
+                obstacleList.addAll(gameState.getGameObjects()    
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.ASTEROID_FIELD)
+                    .sorted(Comparator
+                    .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList()));
+                
+            var wormhole = gameState.getGameObjects()    
+                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.WORMHOLE)
+                    .sorted(Comparator
+                    .comparing(item -> getDistanceBetween(bot, item)))
+                    .collect(Collectors.toList());
+
+            // if(bot.getSize()<600){
+            //     playerAction.heading = getHeadingBetween(foodList.get(0));
+            // } else {//(bot.getSize()>=600){
+            //     if(enemyList.get(0).size>bot.getSize()){
+            //         playerAction.heading = 180-getHeadingBetween(enemyList.get(0));
+            //     } else {
+            //         playerAction.heading = getHeadingBetween(enemyList.get(0));
+            //     }
+            // }
+            playerAction.heading = getHeadingBetween(foodList.get(0));
             
         }
 
