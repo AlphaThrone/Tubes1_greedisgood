@@ -120,7 +120,21 @@ public class BotService {
                 playerAction.action = PlayerActions.FIRETELEPORTER;
             }
 
-
+            // ========== bot bucin (nembak) ===============
+            var enemies = gameState
+                    //.getGameObjects()
+                    .getPlayerGameObjects()
+                    .stream().filter(enemy -> enemy.id != this.bot.id)
+                    //.filter(enemy -> enemy.id != bot.id)
+                    .sorted(Comparator.comparing(enemy -> getDistanceBetween(this.bot, enemy)))
+                    .collect(Collectors.toList());
+            playerAction.heading = getHeadingBetween(foodList.get(0));
+            // kondisi kalo size player >= 50 dia bakal nembakin torpedo ke lawan jenis terdekat
+            if (bot.size >= 50) {
+                playerAction.heading = getHeadingBetween(enemies.get(0));
+                playerAction.action = PlayerActions.FIRETORPEDOES;
+            }
+            // ========== end of bot bucin (nembak) ===============
             
         }
         this.playerAction = playerAction;
