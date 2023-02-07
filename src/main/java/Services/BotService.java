@@ -57,10 +57,12 @@ public class BotService {
                     .comparing(item -> getDistanceBetween(bot, item)))
                     .collect(Collectors.toList()));
 
-            var enemyList = gameState.getGameObjects()    
-                    .stream().filter(item -> item.getGameObjectType() == ObjectTypes.PLAYER)
-                    .sorted(Comparator
-                    .comparing(item -> getDistanceBetween(bot, item)))
+            var enemies = gameState
+                    //.getGameObjects()
+                    .getPlayerGameObjects()
+                    .stream().filter(enemy -> enemy.id != this.bot.id)
+                    //.filter(enemy -> enemy.id != bot.id)
+                    .sorted(Comparator.comparing(enemy -> getDistanceBetween(this.bot, enemy)))
                     .collect(Collectors.toList());
             
             var projectileList = gameState.getGameObjects()    
@@ -99,13 +101,17 @@ public class BotService {
                     .comparing(item -> getDistanceBetween(bot, item)))
                     .collect(Collectors.toList());
 
-            if(bot.getSize()<600){
+            if(bot.getSize()<99999){
                 playerAction.heading = getHeadingBetween(foodList.get(0));
             } else {//(bot.getSize()>=600){
-                if(enemyList.get(0).size > bot.getSize()){
-                    playerAction.heading = 180-getHeadingBetween(enemyList.get(0));
+                if(enemies.get(0).size > bot.getSize()){
+                    int i=0;
+                    while(getDistanceBetween(bot, foodList.get(i))>getDistanceBetween(bot, enemies.get(0))){
+                        i++;
+                    }
+                    playerAction.heading = getHeadingBetween(foodList.get(i));
                 } else {
-                    playerAction.heading = getHeadingBetween(enemyList.get(0));
+                    playerAction.heading = getHeadingBetween(enemies.get(0));
                 }
             }
             
@@ -116,21 +122,17 @@ public class BotService {
             // .collect(Collectors.toList()).get(0);
 
             if(getDistanceBetween(obstacleList.get(0), bot) < 100){
-                playerAction.heading = 180-getHeadingBetween(obstacleList.get(0));
-                playerAction.action = PlayerActions.FIRETELEPORTER;
+                int i=0;
+                while(getDistanceBetween(foodList.get(i), obstacleList.get(i))<obstacleList.get(i).getSize()){
+                    i++;
+                }
+                playerAction.heading = getHeadingBetween(foodList.get(i));
             }
 
             // ========== bot bucin (nembak) ===============
-            var enemies = gameState
-                    //.getGameObjects()
-                    .getPlayerGameObjects()
-                    .stream().filter(enemy -> enemy.id != this.bot.id)
-                    //.filter(enemy -> enemy.id != bot.id)
-                    .sorted(Comparator.comparing(enemy -> getDistanceBetween(this.bot, enemy)))
-                    .collect(Collectors.toList());
             playerAction.heading = getHeadingBetween(foodList.get(0));
             // kondisi kalo size player >= 50 dia bakal nembakin torpedo ke lawan jenis terdekat
-            if (bot.size >= 50) {
+            if (bot.size >= 25 && getDistanceBetween(bot, enemies.get(0))<125 + bot.getSize() + enemies.get(0).getSize()) {
                 playerAction.heading = getHeadingBetween(enemies.get(0));
                 playerAction.action = PlayerActions.FIRETORPEDOES;
             }
