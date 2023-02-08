@@ -138,6 +138,10 @@ public class BotService {
             }
             // ========== end of bot bucin (nembak) ===============
             
+            if (projectileList.size() > 0 && getDistanceBetween(projectileList.get(0), bot) < 100){
+                playerAction.heading = getHeadingBetween(projectileList.get(0));
+                playerAction.action = PlayerActions.ACTIVATESHIELD;
+            }
         }
         this.playerAction = playerAction;
     }
