@@ -76,20 +76,21 @@ public class BotService {
                     .sorted(Comparator
                     .comparing(item -> getDistanceBetween(bot, item)))
                     .collect(Collectors.toList());
-            if(bot.getSize()<99999){
+            //Handle case if there is no food left
+            if(foodList.isEmpty()){
+                playerAction.action = PlayerActions.FORWARD; 
+                playerAction.heading = getHeadingBetween(gameState.world)+90 % 360;
+            } else {
+            //Basic greedy for food
                 playerAction.heading = getHeadingBetween(foodList.get(0));
                 playerAction.action = PlayerActions.FORWARD; 
             }
+            //Maneuverability if nearest food has an enemy near it
             if(enemies.get(0).size > bot.getSize() && getDistanceBetween(bot, enemies.get(0)) < 100){
-                int i=0;
-                while(getDistanceBetween(bot, foodList.get(i))>getDistanceBetween(bot, enemies.get(0))){
-                    i++;
-                }
-                playerAction.heading = getHeadingBetween(foodList.get(i));
+                playerAction.heading = 180+getHeadingBetween(foodList.get(0)) % 360;
                 playerAction.action = PlayerActions.FORWARD;
             }
-            
-
+            //Maneuverability if nearest food within an obstacle
             if(getDistanceBetween(obstacleList.get(0), bot) < 100){
                 int i=0;
                 while(getDistanceBetween(foodList.get(i), obstacleList.get(0))<obstacleList.get(0).getSize()){
@@ -102,21 +103,22 @@ public class BotService {
             // ========== bot bucin (nembak) ===============
             playerAction.heading = getHeadingBetween(foodList.get(0));
             // kondisi kalo size player >= 50 dia bakal nembakin torpedo ke lawan jenis terdekat
-            if (bot.size >= 30 && (getDistanceBetween(bot, enemies.get(0))<400 + bot.getSize() + enemies.get(0).getSize())) {
+            if (bot.size >= 50 && (getDistanceBetween(bot, enemies.get(0))<400 + bot.getSize() + enemies.get(0).getSize())) {
                 playerAction.heading = getHeadingBetween(enemies.get(0));
                 playerAction.action = PlayerActions.FIRETORPEDOES;
             }
             // ========== end of bot bucin (nembak) ===============
-            
+            //Defensive mechanism on any incoming projectile
             if (projectileList.size() > 0 && getDistanceBetween(projectileList.get(0), bot) < 100 && bot.getSize()>40){
-                playerAction.heading = getHeadingBetween(projectileList.get(0));
                 playerAction.action = PlayerActions.ACTIVATESHIELD;
             }
+            //Redirection if heading to edge of map
             var distanceFromCenter = getDistanceBetween(bot, gameState.world);
             if(distanceFromCenter + (1.5 * bot.size) > gameState.world.radius){
                 playerAction.heading = getHeadingBetween(gameState.world);
+                playerAction.action = PlayerActions.FORWARD;
             }
-
+            
             int teleportTick = 0;
             if (bot.getSize() > enemies.get(0).size && bot.getSize() > 30 && getDistanceBetween(bot, enemies.get(0)) > 100){
                 playerAction.heading = getHeadingBetween(enemies.get(0));
@@ -124,8 +126,7 @@ public class BotService {
                 teleportTick++;
                 isTeleport = true;
             }
-            if (isTeleport && teleportTick + gameState.world.currentTick % 100 == 0){
-                playerAction.heading = getHeadingBetween(enemies.get(0));
+            if (isTeleport && teleportTick + gameState.world.currentTick % 200 == 0){
                 playerAction.action = PlayerActions.TELEPORT;
             }
         }
