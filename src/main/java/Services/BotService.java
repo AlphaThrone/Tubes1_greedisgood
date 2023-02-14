@@ -10,6 +10,7 @@ public class BotService {
     private GameObject bot;
     private PlayerAction playerAction;
     private GameState gameState;
+    private boolean isTeleport = true;
     // private GameObject worldCenter;
 
     public BotService() {
@@ -114,6 +115,18 @@ public class BotService {
             var distanceFromCenter = getDistanceBetween(bot, gameState.world);
             if(distanceFromCenter + (1.5 * bot.size) > gameState.world.radius){
                 playerAction.heading = getHeadingBetween(gameState.world);
+            }
+
+            int teleportTick = 0;
+            if (bot.getSize() > enemies.get(0).size && bot.getSize() > 30 && getDistanceBetween(bot, enemies.get(0)) > 100){
+                playerAction.heading = getHeadingBetween(enemies.get(0));
+                playerAction.action = PlayerActions.FIRETELEPORT;
+                teleportTick++;
+                isTeleport = true;
+            }
+            if (isTeleport && teleportTick + gameState.world.currentTick % 100 == 0){
+                playerAction.heading = getHeadingBetween(enemies.get(0));
+                playerAction.action = PlayerActions.TELEPORT;
             }
         }
         this.playerAction = playerAction;
