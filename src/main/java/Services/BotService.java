@@ -83,16 +83,13 @@ public class BotService {
                     .sorted(Comparator
                     .comparing(item -> getDistanceBetween(bot, item)))
                     .collect(Collectors.toList());
-            if(bot.getSize()<99999){
-                playerAction.heading = getHeadingBetween(foodList.get(0));
-                playerAction.action = PlayerActions.FORWARD; 
-            }
+            
+            playerAction.heading = getHeadingBetween(foodList.get(0));
+            playerAction.action = PlayerActions.FORWARD; 
+            
             if(enemies.get(0).size > bot.getSize() && getDistanceBetween(bot, enemies.get(0)) < 100){
                 int i=0;
-                while(getDistanceBetween(bot, foodList.get(i))>getDistanceBetween(bot, enemies.get(0))){
-                    i++;
-                }
-                playerAction.heading = getHeadingBetween(foodList.get(i));
+                playerAction.heading = getHeadingBetween(foodList.get(0))+180%360;
                 playerAction.action = PlayerActions.FORWARD;
                 // System.out.println("Tidak ada ancaman terdekat, mencari makanan..\n");
             }
@@ -198,7 +195,7 @@ public class BotService {
             //     System.out.println("Teleport mendekati mangsa, mengaktifkan teleport\n");
             // }
 
-            if (!availableTargets.isEmpty() && this.bot.size > 80 && !isTeleport && countTeleport > 0) {
+            if (!availableTargets.isEmpty() && this.bot.size > 50+availableTargets.get(0).getSize() && !isTeleport && countTeleport > 0) {
                 // teleportTick++;
                 this.target = availableTargets.get(0);
                 this.isTeleport = true;
