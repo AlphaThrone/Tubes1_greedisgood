@@ -62,6 +62,7 @@ Ada serangkaian *requirement* dan instalasi yang perlu dilakukan agar dapat menj
   4. Buka menu "Load"
   5. Pilih file JSON yang ingin diload pada “Game Log”, lalu “Start”
   6. Setelah masuk ke visualisasinya, kalian dapat melakukan start, pause, rewind, dan reset
+
 Selamat!! Program sudah bisa berjalan dan anda bisa melihat kinerja dari bot kami
 ## Author/Identitas Pembuat Program
 - 13521012 / Haikal Ardzi Shofiyyurrohman
