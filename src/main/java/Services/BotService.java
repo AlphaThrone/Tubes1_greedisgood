@@ -87,9 +87,9 @@ public class BotService {
             playerAction.heading = getHeadingBetween(foodList.get(0));
             playerAction.action = PlayerActions.FORWARD; 
             
-            if(enemies.get(0).size > bot.getSize() && getDistanceBetween(bot, enemies.get(0)) < 100){
+            if(enemies.get(0).size > bot.getSize() && getDistanceBetween(bot, enemies.get(0)) < 20){
                 int i=0;
-                playerAction.heading = getHeadingBetween(foodList.get(0))+180%360;
+                playerAction.heading = getHeadingBetween(obstacleList.get(0))+180%360;
                 playerAction.action = PlayerActions.FORWARD;
                 // System.out.println("Tidak ada ancaman terdekat, mencari makanan..\n");
             }
@@ -106,6 +106,7 @@ public class BotService {
             }
 
             // ========== bot bucin (nembak) ===============
+            // playerAction.heading = getHeadingBetween(foodList.get(0));
             // kondisi kalo size player >= 50 dia bakal nembakin torpedo ke lawan jenis terdekat
             if (bot.size >= 30 && (getDistanceBetween(bot, enemies.get(0))<125 + bot.getSize() + enemies.get(0).getSize())) {
                 playerAction.heading = getHeadingBetween(enemies.get(0));
@@ -122,7 +123,6 @@ public class BotService {
             var distanceFromCenter = getDistanceBetween(bot, gameState.world);
             if(distanceFromCenter + (1.5 * bot.size) > gameState.world.radius){
                 playerAction.heading = getHeadingBetween(gameState.world);
-                playerAction.action = PlayerActions.FORWARD;
                 // System.out.println("Bot mendekati danger zone, kembali ke safe zone..\n");
             }
 
