@@ -69,4 +69,4 @@ Selamat!! Program sudah bisa berjalan dan anda bisa melihat kinerja dari bot kam
 - 13521013 / Eunice Sarah Siregar
 - 13521029 / Muhammad Malik Ibrahim Baharsyah
 
-[^1]: dotnet ReferenceBot.dll dapat diganti dengan **java -jar <pathfile>/greedisgood.jar
+[^1]: dotnet ReferenceBot.dll dapat diganti dengan **java -jar pathFile/greedisgood.jar**
