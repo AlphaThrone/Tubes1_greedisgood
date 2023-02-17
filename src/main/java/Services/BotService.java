@@ -122,6 +122,7 @@ public class BotService {
             var distanceFromCenter = getDistanceBetween(bot, gameState.world);
             if(distanceFromCenter + (1.5 * bot.size) > gameState.world.radius){
                 playerAction.heading = getHeadingBetween(gameState.world);
+                playerAction.action = PlayerActions.FORWARD;
                 // System.out.println("Bot mendekati danger zone, kembali ke safe zone..\n");
             }
 
