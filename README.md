@@ -57,11 +57,12 @@ Ada serangkaian *requirement* dan instalasi yang perlu dilakukan agar dapat menj
   6. Lalu keluar dari Game
 ## Langkah-langkah menjalankan program  
   1. Jalankan run.bat
-  2. Tunggu hingga proses pada semua terminal berhenti dan tutup semua terminal yang terbuka
-  3. Buka kembali Game
-  4. Buka menu "Load"
-  5. Pilih file JSON yang ingin diload pada “Game Log”, lalu “Start”
-  6. Setelah masuk ke visualisasinya, kalian dapat melakukan start, pause, rewind, dan reset
+  2. Tunggu hingga proses pada semua terminal berhenti 
+  3. Setelah proses-proses berhenti, tutup semua terminal yang terbuka
+  4. Buka kembali Game
+  5. Buka menu "Load"
+  6. Pilih file JSON yang ingin diload pada “Game Log”, lalu “Start”
+  7. Setelah masuk ke visualisasinya, kalian dapat melakukan start, pause, rewind, dan reset
 
 Selamat!! Program sudah bisa berjalan dan anda bisa melihat kinerja dari bot kami
 ## Author/Identitas Pembuat Program
