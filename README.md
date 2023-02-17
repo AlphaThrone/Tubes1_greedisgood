@@ -19,7 +19,7 @@ Ada serangkaian *requirement* dan instalasi yang perlu dilakukan agar dapat menj
   - [Java 11 (minimum)](https://www.oracle.com/java/technologies/downloads/#java)
   - [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 - Requirement
-  1. Membuat file run.bat pada folder ./starter-pack dan mengcopy kode ini
+  1. Membuat file run.bat pada folder ./starter-pack dan mengcopy kode ini[^1]
   ```
   @echo off
   :: Game Runner
@@ -48,7 +48,7 @@ Ada serangkaian *requirement* dan instalasi yang perlu dilakukan agar dapat menj
   start "" dotnet ReferenceBot.dll
   cd ../
 
-  pause
+  pause 
   ```
   2. Lakukan ekstrak pada file .zip **GALAXIO** dalam folder "visualiser" sesuai dengan OS anda
   3. Jalankan aplikasi **GALAXIO**
@@ -68,3 +68,5 @@ Selamat!! Program sudah bisa berjalan dan anda bisa melihat kinerja dari bot kam
 - 13521012 / Haikal Ardzi Shofiyyurrohman
 - 13521013 / Eunice Sarah Siregar
 - 13521029 / Muhammad Malik Ibrahim Baharsyah
+
+[^1]: dotnet ReferenceBot.dll dapat diganti dengan **java -jar <pathfile>/greedisgood.jar
