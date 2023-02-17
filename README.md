@@ -11,14 +11,14 @@ Jika *makanan* yang dituju kapal berada di obstacle maka kapal akan mencari *foo
 Mekanisme penyerangan dapat diaktifkan oleh kapal jika memenuhi beberapa kondisi, contohnya jika *size* kapal lebih dari 30 dan jarak antara kapal dengan musuh kurang dari 125 maka kapal akan menembakkan *torpedo*, namun jika jarak kapal dengan musuh melebihi 125 maka kapal akan menembakkan *teleporter* yang mampu mengurangi kapal dengan musuh.
 ## Requirement program dan instalasi
 Ada serangkaian *requirement* dan instalasi yang perlu dilakukan agar dapat menjalankan *bot* ini dalam permainan **GALAXIO**, yaitu:
-1. Instalasi
+- Instalasi
   - [Galaxio Starter-Pack](https://github.com/EntelectChallenge/2021-Galaxio/releases/tag/2021.3.2)
   - [.NET Core 3.1.426](https://dotnet.microsoft.com/en-us/download/dotnet/3.1)
   - [.NET Core 5,0](https://dotnet.microsoft.com/en-us/download/dotnet/5.0)
   - [NodeJS](https://nodejs.org/en/download/)
   - [Java 11 (minimum)](https://www.oracle.com/java/technologies/downloads/#java)
   - [IntelliJ IDEA](https://www.jetbrains.com/idea/)
-2. Requirement
+- Requirement
   1. Membuat file run.bat pada folder ./starter-pack dan mengcopy kode ini
 ```
  @echo off
