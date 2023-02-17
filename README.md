@@ -19,7 +19,7 @@ Ada serangkaian *requirement* dan instalasi yang perlu dilakukan agar dapat menj
   - [Java 11 (minimum)](https://www.oracle.com/java/technologies/downloads/#java)
   - [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 - Requirement
-  1. Membuat file run.bat pada folder ./starter-pack dan mengcopy kode ini (Baca sidenote pada halaman paling bawah readme)[^1]
+  1. Membuat file run.bat pada folder ./starter-pack dan mengcopy kode ini (dotnet ReferenceBot.dll dapat diganti dengan **java -jar pathFile/greedisgood.jar**)
   ```
   @echo off
   :: Game Runner
@@ -68,5 +68,3 @@ Selamat!! Program sudah bisa berjalan dan anda bisa melihat kinerja dari bot kam
 - 13521012 / Haikal Ardzi Shofiyyurrohman
 - 13521013 / Eunice Sarah Siregar
 - 13521029 / Muhammad Malik Ibrahim Baharsyah
-
-[^1]: dotnet ReferenceBot.dll dapat diganti dengan **java -jar pathFile/greedisgood.jar**
