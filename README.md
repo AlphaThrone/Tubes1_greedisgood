@@ -20,36 +20,36 @@ Ada serangkaian *requirement* dan instalasi yang perlu dilakukan agar dapat menj
   - [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 - Requirement
   1. Membuat file run.bat pada folder ./starter-pack dan mengcopy kode ini
-```
- @echo off
-:: Game Runner
-cd ./runner-publish/
-start "" dotnet GameRunner.dll
+  ```
+  @echo off
+  :: Game Runner
+  cd ./runner-publish/
+  start "" dotnet GameRunner.dll
 
-:: Game Engine
-cd ../engine-publish/
-timeout /t 1
-start "" dotnet Engine.dll
+  :: Game Engine
+  cd ../engine-publish/
+  timeout /t 1
+  start "" dotnet Engine.dll
 
-:: Game Logger
-cd ../logger-publish/
-timeout /t 1
-start "" dotnet Logger.dll
+  :: Game Logger
+  cd ../logger-publish/
+  timeout /t 1
+  start "" dotnet Logger.dll
 
-:: Bots
-cd ../reference-bot-publish/
-timeout /t 3
-start "" dotnet ReferenceBot.dll
-timeout /t 3
-start "" dotnet ReferenceBot.dll
-timeout /t 3
-start "" dotnet ReferenceBot.dll
-timeout /t 3
-start "" dotnet ReferenceBot.dll
-cd ../
+  :: Bots
+  cd ../reference-bot-publish/
+  timeout /t 3
+  start "" dotnet ReferenceBot.dll
+  timeout /t 3
+  start "" dotnet ReferenceBot.dll
+  timeout /t 3
+  start "" dotnet ReferenceBot.dll
+  timeout /t 3
+  start "" dotnet ReferenceBot.dll
+  cd ../
 
-pause
-```
+  pause
+  ```
   2. Lakukan ekstrak pada file .zip **GALAXIO** dalam folder "visualiser" sesuai dengan OS anda
   3. Jalankan aplikasi **GALAXIO**
   4. Buka menu "Options"
