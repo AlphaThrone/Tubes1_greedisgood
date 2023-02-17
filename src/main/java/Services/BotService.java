@@ -106,7 +106,6 @@ public class BotService {
             }
 
             // ========== bot bucin (nembak) ===============
-            playerAction.heading = getHeadingBetween(foodList.get(0));
             // kondisi kalo size player >= 50 dia bakal nembakin torpedo ke lawan jenis terdekat
             if (bot.size >= 30 && (getDistanceBetween(bot, enemies.get(0))<125 + bot.getSize() + enemies.get(0).getSize())) {
                 playerAction.heading = getHeadingBetween(enemies.get(0));
