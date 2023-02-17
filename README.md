@@ -19,7 +19,7 @@ Ada serangkaian *requirement* dan instalasi yang perlu dilakukan agar dapat menj
   - [Java 11 (minimum)](https://www.oracle.com/java/technologies/downloads/#java)
   - [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 - Requirement
-  1. Membuat file run.bat pada folder ./starter-pack dan mengcopy kode ini[^1]
+  1. Membuat file run.bat pada folder ./starter-pack dan mengcopy kode ini (Baca sidenote pada halaman paling bawah readme)[^1]
   ```
   @echo off
   :: Game Runner
